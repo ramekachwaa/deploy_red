@@ -38,4 +38,7 @@ urlpatterns = [
 
     path('add_project', views.add_project,name="add_project"),
     path('add_company', views.add_company,name="add_company"),
+
+    path('get_type_count', views.get_type_count,name="get_type_count"),
+    path('get_type_only/<str:type>', views.get_type_only,name="get_type_only"),
 ]

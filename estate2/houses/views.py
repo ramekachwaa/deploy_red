@@ -198,6 +198,86 @@ def add_project(request):
             return redirect('show_all_projects')
     context = {"form":form}
     return render(request,'houses/add_project.html',context)
+choices2 = (    ('Building', 'Building'),
+                ('Clinic', 'Clinic'),
+                ('Food & Beverage', 'Food & Beverage'),
+                ('Office', 'Office'),
+                ('Retail', 'Retail'),
+                ('Shop', 'Shop'),
+                ('Store', 'Store'),
+                ('Apartment', 'Apartment'),
+                ('Chalet', 'Chalet'),
+                ('Condo', 'Condo'),
+                ('Duplex', 'Duplex'),
+                ('Ground Floor', 'Ground Floor'),
+                ('iVilla', 'iVilla'),
+                ('Multi Family Home', 'Multi Family Home'),
+                ('Penthouse', 'Penthouse'),
+                ('S Villa', 'S Villa'),
+                ('Serviced Apartment', 'Serviced Apartment'),
+                ('Single Family Home', 'Single Family Home'),
+                ('Sky Loft', 'Sky Loft'),
+                ('Studio', 'Studio'),
+                ('Townhouse', 'Townhouse'),
+                ('Twin House', 'Twin House'),
+                ('Villa', 'Villa'))
+
+def get_type_count(request):
+    all_houses = House.objects.all()
+    types = {key[0]:0 for key in choices2}
+    for house in all_houses:
+        types[house.type] += 1
+    context = {"types":types}
+    return render(request,'houses/get_type_count.html',context)
+
+
+
+
+
+def get_type_only(request,type):
+    order_index = 0
+    if request.method == "POST":
+        order_index = request.POST["order_by"]
+    else:
+        order_index = request.GET.get("order_by")
+    all_houses = House.objects.all()
+
+    all_houses_old = all_houses
+    try:
+        if order_index == "1":
+            all_houses_old = all_houses_old.order_by("price")
+            print("              1")
+        if order_index == "2":
+            all_houses_old = all_houses_old.order_by("-price")
+            print("              2")
+        if order_index == "3":
+            all_houses_old = all_houses_old.order_by("area")
+            print("              3")
+        if order_index == "4":
+            all_houses_old = all_houses_old.order_by("-area")
+            print("              4")
+        if order_index == "0":
+            pass
+    except Exception as inst:
+        print("order_index does not exist yet")
+        print(inst)
+
+    type_houses = []
+    for house in all_houses_old:
+        if house.type == type:
+            type_houses.append(house)
+    paginator = Paginator(type_houses, 6)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    print(f"h  h   h  h => {order_index}")
+    context = {"order_value": order_index,
+               "page_obj": page_obj}
+    return render(request,'houses/show_all_type.html',context)
+
+
+
+
 
 def add_company(request):
     form = CompanyForm()
