@@ -277,7 +277,15 @@ def get_type_only(request,type):
 
 
 
+def delete_msg(request,id):
+    msg = Message.objects.get(id=id)
+    msg.delete()
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
+def delete_inquiry(request,id):
+    inquiry = Inquiry.objects.get(id=id)
+    inquiry.delete()
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 def add_company(request):
     form = CompanyForm()

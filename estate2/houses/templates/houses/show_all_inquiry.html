@@ -50,6 +50,7 @@
       <th scope="col">Min Size</th>
       <th scope="col">Beds</th>
       <th scope="col">Bathrooms</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -68,6 +69,7 @@
       <td>{{inquiry.min_size}}</td>
       <td>{{inquiry.beds}}</td>
       <td>{{inquiry.bathrooms}}</td>
+      <td><a class="btn btn-danger" href="{% url 'delete_inquiry' inquiry.id %}">Delete</a></td>
     </tr>
   {% endfor %}
   </tbody>

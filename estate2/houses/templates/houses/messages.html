@@ -25,6 +25,7 @@ bottom:100%;
       <th scope="col">Project</th>
       <th scope="col">Content</th>
       <th scope="col">Date</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -37,6 +38,7 @@ bottom:100%;
       <td style="width:100px">{{msg.project}}</td>
       <td style="font-weight:bold;">{{msg.content}}</td>
       <td>{{msg.date}}</td>
+      <td><a class="btn btn-danger" href="{% url 'delete_msg' msg.id %}">Delete</a></td>
     </tr>
     {% endfor %}
   </tbody>

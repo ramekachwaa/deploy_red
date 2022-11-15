@@ -41,4 +41,7 @@ urlpatterns = [
 
     path('get_type_count', views.get_type_count,name="get_type_count"),
     path('get_type_only/<str:type>', views.get_type_only,name="get_type_only"),
+
+    path('delete_msg/<int:id>', views.delete_msg,name="delete_msg"),
+    path('delete_inquiry/<int:id>', views.delete_inquiry,name="delete_inquiry"),
 ]
