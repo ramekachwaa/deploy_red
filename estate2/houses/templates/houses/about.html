@@ -17,7 +17,11 @@
               {% endif %}
             </div>
             <div class="title-single-box">
+              {% if request.user.is_authenticated %}
               <h1 class="title-single">{{request.user.about_set.all.0.first_paragraph}}</h1>
+              {% else %}
+              <h1 class="title-single">We Do Great Design For Creative Folks</h1>
+              {% endif %}
             </div>
 
           </div>
@@ -40,10 +44,17 @@
             </div>
 
             <div class="sinse-box">
-              <h3 class="sinse-title">{{request.user.about_set.all.0.name1}}
+              {% if request.user.is_authenticated %}
+              <h3 class="sinse-title">{{request.user.about_set.all.0.name1}}</h3>
+                {% else %}
+              <h3 class="sinse-title">red winners</h3>
+                {% endif %}
                 <span></span>
+              {% if request.user.is_authenticated %}
                 <br> {{request.user.about_set.all.0.since_when}}
-              </h3>
+              {% else %}
+                <br> Since 2017
+              {% endif %}
             </div>
 
           </div>

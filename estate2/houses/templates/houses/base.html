@@ -175,16 +175,28 @@
             {% endif %}
             <div class="w-body-a">
               <p class="w-text-a color-text-a">
-                {{request.user.footer_text_set.all.0.address}}
+                {% if request.user.is_authenticated %}
+                  {{request.user.footer_text_set.all.0.address}}
+                {% else %}
+                  custom address | Building 259, 2nd Sector, North 90th St. New Cairo, Cairo - Egypt.
+                {% endif %}
               </p>
             </div>
             <div class="w-footer-a">
               <ul class="list-unstyled">
                 <li class="color-a">
+                  {% if request.user.is_authenticated %}
                   <span class="color-text-a">Phone. {{request.user.footer_text_set.all.0.phone}}</span>
+                  {% else %}
+                  <span class="color-text-a">Phone. contact@example.com</span>
+                  {% endif %}
                 </li>
                 <li class="color-a">
+                  {% if request.user.is_authenticated %}
                   <span class="color-text-a">Email. {{request.user.footer_text_set.all.0.email}}</span>
+                  {% else %}
+                  <span class="color-text-a">Email. +54 356 945234</span>
+                  {% endif %}
                 </li>
               </ul>
             </div>
