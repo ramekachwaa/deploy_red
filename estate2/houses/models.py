@@ -89,6 +89,9 @@ class House(models.Model):
     amenities = models.ManyToManyField(Amenity,verbose_name=_("amenities"))
     company = models.ForeignKey('Company',on_delete=models.CASCADE,blank=True,null=True)
     project = models.ForeignKey('Project',on_delete=models.CASCADE,blank=True,null=True)
+    number_of_installments = models.IntegerField(default=1)
+    time_of_delivery = models.DateTimeField(null=True,blank=True)
+    in_advance_price = models.IntegerField(default=0)
     def __str__(self):
         return f"House ({self.id})==>{self.price}EGP"
 
@@ -142,4 +145,20 @@ class Inquiry(models.Model):
     beds = models.IntegerField()
     bathrooms = models.IntegerField()
     date = models.DateTimeField(auto_now_add=True,null=True,blank=True)
+
+class footer_text(models.Model):
+    address = models.CharField(max_length=100,default='Head Office | Building 259, 2nd Sector, North 90th St. New Cairo, Cairo - Egypt.')
+    phone = models.CharField(max_length=50,default='Phone . contact@example.com')
+    email = models.CharField(max_length=50,default='Email . +54 356 945234')
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+class about(models.Model):
+    first_paragraph = models.CharField(max_length=100,default='We Do Great Design For Creative Folks')
+    img1 = models.ImageField(upload_to="images",null=True,blank=True)
+    name1 = models.CharField(max_length=50,default='red winners')
+    img2 = models.ImageField(upload_to="images",null=True,blank=True)
+    since_when = models.CharField(max_length=50,default='Since 2017')
+    description1 = models.TextField(default="Enter description 1 here")
+    description1 = models.TextField(default="Enter description 2 here")
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=1)
 

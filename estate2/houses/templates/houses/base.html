@@ -169,21 +169,26 @@
             <div class="w-header-a">
               <h3 class="w-title-a text-brand">red winners</h3>
             </div>
+            <!--footer-->
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'edit_footer' 1 %}" class="btn btn-success">Edit</a>
+            {% endif %}
             <div class="w-body-a">
               <p class="w-text-a color-text-a">
-                Head Office | Building 259, 2nd Sector, North 90th St. New Cairo, Cairo - Egypt.
+                {{request.user.footer_text_set.all.0.address}}
               </p>
             </div>
             <div class="w-footer-a">
               <ul class="list-unstyled">
                 <li class="color-a">
-                  <span class="color-text-a">Phone .</span> contact@example.com
+                  <span class="color-text-a">Phone. {{request.user.footer_text_set.all.0.phone}}</span>
                 </li>
                 <li class="color-a">
-                  <span class="color-text-a">Email .</span> +54 356 945234
+                  <span class="color-text-a">Email. {{request.user.footer_text_set.all.0.email}}</span>
                 </li>
               </ul>
             </div>
+
           </div>
         </div>
 

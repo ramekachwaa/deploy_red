@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Amenity,House,Message,Image_of_house,Inquiry,Project,Company
+from .models import Amenity,House,Message,Image_of_house,Inquiry,Project,Company,footer_text,about
 from .forms import HouseForm,SearchForm,MessageForm,InquiryForm,ProjectForm,CompanyForm
 from django.db.models import Q
 from django.views.generic import ListView
@@ -275,7 +275,41 @@ def get_type_only(request,type):
                "page_obj": page_obj}
     return render(request,'houses/show_all_type.html',context)
 
+def edit_footer_old(request):
+    footer = footer_text.objects.all()[0]
+    context = {"footer":footer}
+    return render(request,'',context)
 
+
+class edit_footer(UpdateView):
+    # specify the model you want to use
+    model = footer_text
+    template_name = 'houses/update_footer.html'
+    fields = "__all__"
+    success_url = "/"
+
+class edit_msg(UpdateView):
+    # specify the model you want to use
+    model = Message
+    template_name = 'houses/update_footer.html'
+    fields = "__all__"
+    success_url = reverse_lazy("messages")
+
+
+class edit_inquiry(UpdateView):
+    # specify the model you want to use
+    model = Inquiry
+    template_name = 'houses/update_footer.html'
+    fields = "__all__"
+    success_url = reverse_lazy("show_all_inquiry")
+
+
+class edit_about(UpdateView):
+    # specify the model you want to use
+    model = about
+    template_name = 'houses/update_footer.html'
+    fields = "__all__"
+    success_url = reverse_lazy("about")
 
 def delete_msg(request,id):
     msg = Message.objects.get(id=id)

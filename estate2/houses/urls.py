@@ -44,4 +44,9 @@ urlpatterns = [
 
     path('delete_msg/<int:id>', views.delete_msg,name="delete_msg"),
     path('delete_inquiry/<int:id>', views.delete_inquiry,name="delete_inquiry"),
+
+    path('edit_footer/<int:pk>', views.edit_footer.as_view(),name="edit_footer"),
+    path('edit_msg/<int:pk>', views.edit_msg.as_view(),name="edit_msg"),
+    path('edit_inquiry/<int:pk>', views.edit_inquiry.as_view(),name="edit_inquiry"),
+    path('edit_about/<int:pk>', views.edit_about.as_view(),name="edit_about"),
 ]
